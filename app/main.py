@@ -4,6 +4,7 @@ from app.schemas import userCreate
 app = FastAPI(title="Lab1 - FastAPI User Api")
 
 users: list[userCreate] = []
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -31,11 +32,11 @@ def get_users():
 @app.get("/api/users/{user_id}")
 def get_user(user_id: int):
     for existing_user in users:
-        if existing_user.user_id == user_id:
-            return existing_user
-
+        if existing_user.userid == user_id:
+            return existing_user 
+        
     raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
+        status_code=status.HTTP_404_NOT_FOUND, 
         detail="User not found",
     )
 
