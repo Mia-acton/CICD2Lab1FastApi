@@ -31,7 +31,7 @@ def test_duplicate_user_returns_409(client):
     response = client.post("/api/users", json=user_payload())
 
     assert response.status_code == 409
-    assert "exists" in response.json()["detail"].lower()
+    assert "already exists" in response.json()["detail"].lower()
 
 
 @pytest.mark.parametrize(
