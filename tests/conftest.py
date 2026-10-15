@@ -28,7 +28,7 @@ def reset_database():
     Base.metadata.create_all(bind=test_engine) 
     yield 
     Base.metadata.drop_all(bind=test_engine) 
-    
+
 def override_get_db(): 
     db = TestingSessionLocal() 
     try: 
@@ -38,3 +38,7 @@ def override_get_db():
  
  
 app.dependency_overrides[get_db] = override_get_db 
+
+@pytest.fixture 
+def client(): 
+    return TestClient(app): 
