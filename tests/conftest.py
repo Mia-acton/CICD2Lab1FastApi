@@ -23,6 +23,12 @@ TestingSessionLocal = sessionmaker(
     expire_on_commit=False, 
 ) 
 
+@pytest.fixture(autouse=True) 
+def reset_database(): 
+    Base.metadata.create_all(bind=test_engine) 
+    yield 
+    Base.metadata.drop_all(bind=test_engine) 
+    
 def override_get_db(): 
     db = TestingSessionLocal() 
     try: 
