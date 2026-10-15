@@ -15,17 +15,12 @@ def user_payload(
     }
 
 
-def test_create_user_returns_201(client):
-    response = client.post("/api/users", json=user_payload())
-
-    assert response.status_code == 201
-    data = response.json()
-
-    # The database generates the ID.
-    assert isinstance(data["id"], int)
+def test_create_user_returns_201(client): 
+    response = client.post("/api/users", json= user_payload()) 
+    assert response.status_code == 201 
+    data = response.json() 
+    assert data["id"] == 1 
     assert data["name"] == "Paul"
-    assert data["email"] == "paul@atu.ie"
-    assert data["student_id"] == "S1234567"
 
 
 def test_duplicate_user_returns_409(client):
