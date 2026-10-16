@@ -1,38 +1,19 @@
-# CICD-2 FastAPI Lab Template
+# CICD-2 Lab 5: Two FastAPI Microservices with HTTPX
+This project contains two independent FastAPI services:
 
-This repository contains a FastAPI lab for the CICD-2 module.  
-Use this `README.md` as the standard structure for future labs.
+- User API (port 8000): Keeps the existing user endpoints and SQLAlchemy/SQLite database, and calls the Product Service using HTTPX.
+- Product Service (port 8001): Returns predefined product information.
 
----
+### Run both services in GitHub Codespaces
 
-## Lab Title
+Open two separate terminals in the same Codespace.
 
-**Replace this with the lab title**
+**Terminal 1 — Product Service:**
+python -m uvicorn product_service.main:app --host 0.0.0.0 --port 8001 --reload
 
-Example:
+**Terminal 2 — User API:**
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
-> Lab 1 — Creating a Basic FastAPI Application
+Keep both processes running. 
 
----
-## Repository Structure
-
-Use the following structure for the labs:
-
-```text
-project-name/
-│
-├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── schemas.py
-│   ├── services.py
-│   └── models.py
-│
-├── tests/
-│   ├── __init__.py
-│   └── test_main.py
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
+### PRODUCT_SERVICE_URL
