@@ -1,38 +1,20 @@
-# CICD-2 FastAPI Lab Template
+# Lab 5 – Two FastAPI Microservices with HTTPX 
 
-This repository contains a FastAPI lab for the CICD-2 module.  
-Use this `README.md` as the standard structure for future labs.
+## Running the services
 
----
+From the project folder, open two separate Codespaces terminals and leave both running.
 
-## Lab Title
+**Terminal 1 – Product Service (port 8001):**
+python -m uvicorn product_service.main:app --host 0.0.0.0 --port 8001 --reload
 
-**Replace this with the lab title**
+**Terminal 2 – User API (port 8000):**
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
-Example:
+## Getting a product
 
-> Lab 1 — Creating a Basic FastAPI Application
+`GET /api/products/{product_id}` asks the User API to fetch a product from the Product Service using HTTPX.
 
----
-## Repository Structure
+To try it, open port 8000 from the Codespaces Ports tab, add `/docs` to the URL and test `GET /api/products/1`.
 
-Use the following structure for the labs:
-
-```text
-project-name/
-│
-├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── schemas.py
-│   ├── services.py
-│   └── models.py
-│
-├── tests/
-│   ├── __init__.py
-│   └── test_main.py
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
+## PRODUCT_SERVICE_URL
+`PRODUCT_SERVICE_URL` is an environment variable that tells the User API where to find the Product Service. It defaults to `http://127.0.0.1:8001` in Codespaces and can be changed without editing the code.
